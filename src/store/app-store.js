@@ -5,6 +5,7 @@ export const useAppStore = create(
   persist(
     (set, get) => ({
       teams: [],
+      currTeam: "",
 
       addNewTeam: (newTeam) => {
         set((state) => ({
@@ -15,6 +16,10 @@ export const useAppStore = create(
             },
           ],
         }));
+      },
+
+      setCurrTeam: (teamName) => {
+        set({ currTeam: teamName });
       },
     }),
     { name: "appData" }

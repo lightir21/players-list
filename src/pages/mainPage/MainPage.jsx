@@ -1,13 +1,17 @@
 import "./mainPage.scss";
-import { list } from "../../temporaryList";
 import { useNavigate } from "react-router-dom";
 import { useAppStore } from "../../store/app-store";
 
 const MainPage = () => {
   const navigate = useNavigate();
 
-  const { teams } = useAppStore((state) => state);
-  console.log(teams);
+  const { teams, setCurrTeam } = useAppStore((state) => state);
+
+  const onTeamClick = (teamName) => {
+    setCurrTeam(teamName);
+    navigate("/team");
+  };
+
   return (
     <div className="mainPage">
       <div className="mainPage__container">
@@ -23,16 +27,15 @@ const MainPage = () => {
             const teamName = Object.keys(team);
 
             return (
-              <li className="mainPage__list-item" key={teamName}>
+              <li
+                className="mainPage__list-item"
+                key={teamName}
+                onClick={() => onTeamClick(teamName)}
+              >
                 {teamName}
               </li>
             );
           })}
-          {/* {Object.keys(list).map((item) => (
-            <li className="mainPage__list-item" key={item}>
-              {item}
-            </li> */}
-          {/* ))} */}
         </ul>
       </div>
     </div>

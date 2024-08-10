@@ -1,6 +1,9 @@
+import { useAppStore } from "../../store/app-store";
 import "./teamPage.scss";
 
-const TeamPage = ({ teamName, playersList }) => {
+const TeamPage = () => {
+  const { currTeam: teamName } = useAppStore();
+
   return (
     <div className="teamPage">
       <h2 className="teamPage__title">{teamName}</h2>
@@ -10,9 +13,9 @@ const TeamPage = ({ teamName, playersList }) => {
           <button className="teamPage__btn btn">הוסף דיווח</button>
         </div>
         <div className="teamPage__list">
-          {playersList.map((player) => (
+          {/* {playersList.map((player) => (
             <li key={player}>{player}</li>
-          ))}
+          ))} */}
         </div>
       </div>
     </div>
