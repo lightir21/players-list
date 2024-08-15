@@ -18,6 +18,7 @@ const AddNewTeam = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     addNewTeam(teamName);
+    navigate("/");
   };
 
   const onNameChange = (e) => {

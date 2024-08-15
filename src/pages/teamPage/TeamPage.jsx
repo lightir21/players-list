@@ -1,23 +1,48 @@
-import { useAppStore } from "../../store/app-store";
 import "./teamPage.scss";
+import { useNavigate } from "react-router-dom";
+import { AddPlayer, BackBtn } from "../../components";
+import { useAppStore } from "../../store/app-store";
+import { useState } from "react";
 
 const TeamPage = () => {
-  const { currTeam: teamName } = useAppStore();
+  const [showAddPlayer, setShowAddPlayer] = useState(false);
+  const { currTeam: teamName, addNewPlayerToTeam, teams } = useAppStore();
+
+  const navigate = useNavigate();
+
+  const onBackClick = () => {
+    navigate("/");
+  };
+
+  const onAddPlayerClick = () => {
+    setShowAddPlayer((prev) => !prev);
+  };
 
   return (
     <div className="teamPage">
       <h2 className="teamPage__title">{teamName}</h2>
       <div className="teamPage__container">
         <div className="teamPage__btn-container">
-          <button className="teamPage__btn btn">הוסף שחקן</button>
+          <button className="teamPage__btn btn" onClick={onAddPlayerClick}>
+            הוסף שחקן
+          </button>
           <button className="teamPage__btn btn">הוסף דיווח</button>
         </div>
-        <div className="teamPage__list">
-          {/* {playersList.map((player) => (
-            <li key={player}>{player}</li>
-          ))} */}
-        </div>
       </div>
+      <div className="teamPage__list">
+        {teams[teamName].players &&
+          teams[teamName].players.map((player) => {
+            return (
+              <li className="teamPage__list-item" key={player.name}>
+                {player.name}
+              </li>
+            );
+          })}
+      </div>
+      {showAddPlayer && (
+        <AddPlayer addNewPlayerToTeam={addNewPlayerToTeam} team={teamName} />
+      )}
+      <BackBtn onClick={onBackClick} />
     </div>
   );
 };

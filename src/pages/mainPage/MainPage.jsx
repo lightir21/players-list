@@ -23,16 +23,14 @@ const MainPage = () => {
         </button>
 
         <ul className="mainPage__teams-list">
-          {teams.map((team) => {
-            const teamName = Object.keys(team);
-
+          {Object.keys(teams).map((team) => {
             return (
               <li
                 className="mainPage__list-item"
-                key={teamName}
-                onClick={() => onTeamClick(teamName)}
+                key={team}
+                onClick={() => onTeamClick(team)}
               >
-                {teamName}
+                {team}
               </li>
             );
           })}
