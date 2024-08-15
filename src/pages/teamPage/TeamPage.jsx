@@ -1,6 +1,6 @@
 import "./teamPage.scss";
 import { useNavigate } from "react-router-dom";
-import { AddPlayer, BackBtn } from "../../components";
+import { AddPlayer, BackBtn, PlayersList } from "../../components";
 import { useAppStore } from "../../store/app-store";
 import { useState } from "react";
 
@@ -29,16 +29,9 @@ const TeamPage = () => {
           <button className="teamPage__btn btn">הוסף דיווח</button>
         </div>
       </div>
-      <div className="teamPage__list">
-        {teams[teamName].players &&
-          teams[teamName].players.map((player) => {
-            return (
-              <li className="teamPage__list-item" key={player.name}>
-                {player.name}
-              </li>
-            );
-          })}
-      </div>
+
+      <PlayersList teamName={teamName} teams={teams} />
+
       {showAddPlayer && (
         <AddPlayer addNewPlayerToTeam={addNewPlayerToTeam} team={teamName} />
       )}
